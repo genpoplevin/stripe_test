@@ -12,7 +12,6 @@
  - _Python 3.7.9
  - _Django 3.2.17
  - _Stripe 5.1.1
- - _Unittest
 
 ## Запуск с помощью Docker
 
