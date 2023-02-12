@@ -1,20 +1,26 @@
-from django.conf import settings
-from django.http import JsonResponse
-from django.shortcuts import get_object_or_404, redirect
-from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import TemplateView
+import os
 
 import stripe
+from dotenv import load_dotenv
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from django.views.generic import TemplateView
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_http_methods
 
 from items.models import Item
 
 
+load_dotenv()
+
+
+@require_http_methods(["GET"])
 @csrf_exempt
 def create_checkout_session(request, pk):
 
     item = get_object_or_404(Item, pk=pk)
 
-    stripe.api_key = settings.STRIPE_SECRET_KEY
+    stripe.api_key = os.getenv('STRIPE_SECRET_KEY')
     checkout_session = stripe.checkout.Session.create(
         payment_method_types=['card'],
         line_items=[

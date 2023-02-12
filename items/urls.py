@@ -6,6 +6,7 @@ app_name = 'items'
 urlpatterns = [
     path(
         'item/<int:pk>/',
-        ItemDetailView.as_view()
+        ItemDetailView.as_view(),
+        name='item_detail'
     ),
 ]

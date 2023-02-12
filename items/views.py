@@ -1,7 +1,10 @@
-from django.conf import settings
+import os
+from dotenv import load_dotenv
 from django.views.generic import DetailView
 
 from items.models import Item
+
+load_dotenv()
 
 
 class ItemDetailView(DetailView):
@@ -10,5 +13,5 @@ class ItemDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ItemDetailView, self).get_context_data(**kwargs)
-        context['stripe_publishable_key'] = settings.STRIPE_PUBLISHABLE_KEY
+        context['stripe_publishable_key'] = os.getenv('STRIPE_PUBLISHABLE_KEY')
         return context
