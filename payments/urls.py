@@ -1,10 +1,8 @@
 from django.urls import path
-from payments.views import (
-    create_checkout_session_one_item,
-    create_checkout_session_order,
-    PaymentFailedView,
-    PaymentSuccessView
-)
+
+from payments.views import (PaymentFailedView, PaymentSuccessView,
+                            create_checkout_session_one_item,
+                            create_checkout_session_order)
 
 app_name = 'payments'
 

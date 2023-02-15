@@ -1,4 +1,5 @@
 from django.urls import path
+
 from items.views import ItemDetailView, ItemListView
 
 app_name = 'items'

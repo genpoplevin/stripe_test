@@ -1,12 +1,11 @@
 import os
 
-from dotenv import load_dotenv
 from django.shortcuts import render
+from dotenv import load_dotenv
 
 from cart.cart import Cart
-from orders.models import OrderItem
 from orders.forms import OrderCreateForm
-
+from orders.models import OrderItem
 
 load_dotenv()
 
