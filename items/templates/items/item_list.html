@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'items/base.html' %}
 {% load static %}
 
 {% block title %}
@@ -16,7 +16,6 @@
                 <p>{{ item.description|linebreaks }}</p>
                 <br>
                 <p>${{ item.get_display_price }}</p>
-                <a href="{% url 'items:item_detail' item.id %}">подробная информация</a>
             </div>
         {% if not forloop.last %}<hr>{% endif %}
         {% endfor %}

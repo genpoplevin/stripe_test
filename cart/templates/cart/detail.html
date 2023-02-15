@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'items/base.html' %}
 {% load static %}
 
 {% block title %}Your shopping cart{% endblock %}
@@ -43,7 +43,9 @@
     </table>
     <p class="text_right">
         <a href="{% url 'items:item_list' %}" class="button light">Continue shopping</a>
-        <a href="{% url 'orders:order_create' %}" class="button">Checkout</a>
+        {% if cart.get_total_price > 0 %}
+            <a href="{% url 'orders:order_create' %}" class="button">Checkout</a>
+        {% endif %}
     </p>
 {% endblock %}
     
