@@ -27,7 +27,7 @@ def create_checkout_session_one_item(request, pk):
         line_items=[
             {
                 'price_data': {
-                    'currency': 'usd',
+                    'currency': item.currency,
                     'product_data': {
                         'name': item.name
                     },
