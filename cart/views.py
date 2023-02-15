@@ -42,4 +42,10 @@ def cart_detail(request):
                      'update': True}
         )
     stripe_publishable_key = os.getenv('STRIPE_PUBLISHABLE_KEY')
-    return render(request, 'cart/detail.html', {'cart': cart, 'stripe_publishable_key': stripe_publishable_key})
+    return render(
+        request,
+        'cart/detail.html',
+        {
+            'cart': cart,
+            'stripe_publishable_key': stripe_publishable_key}
+        )

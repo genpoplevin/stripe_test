@@ -30,7 +30,10 @@ def order_create(request):
             return render(
                 request,
                 'orders/order/created.html',
-                {'order': order, 'stripe_publishable_key': stripe_publishable_key}
+                {
+                    'order': order,
+                    'stripe_publishable_key': stripe_publishable_key
+                }
             )
     else:
         form = OrderCreateForm()

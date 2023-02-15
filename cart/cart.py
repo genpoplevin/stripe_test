@@ -52,7 +52,11 @@ class Cart(object):
             cart[str(item.id)]['item'] = item
         for element in cart.values():
             element['price'] = Decimal(element['price'])
-            element['total_price'] = element['price'] * element['quantity'] / 100
+            element['total_price'] = (
+                element['price']
+                * element['quantity']
+                / 100
+            )
             yield element
 
     def __len__(self):
