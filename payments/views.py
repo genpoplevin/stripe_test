@@ -9,6 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 
 from items.models import Item
+from orders.models import Order
 
 
 load_dotenv()
@@ -16,7 +17,7 @@ load_dotenv()
 
 @require_http_methods(["GET"])
 @csrf_exempt
-def create_checkout_session(request, pk):
+def create_checkout_session_one_item(request, pk):
 
     item = get_object_or_404(Item, pk=pk)
 
@@ -31,6 +32,34 @@ def create_checkout_session(request, pk):
                         'name': item.name
                     },
                     'unit_amount': item.price
+                },
+                'quantity': 1,
+            }
+        ],
+        mode='payment',
+        success_url='http://localhost:8000/success',
+        cancel_url='http://localhost:8000/cancel',
+    )
+    return JsonResponse({'sessionId': checkout_session.id})
+
+
+@require_http_methods(["GET"])
+@csrf_exempt
+def create_checkout_session_order(request, pk):
+
+    item = get_object_or_404(Order, pk=pk)
+
+    stripe.api_key = os.getenv('STRIPE_SECRET_KEY')
+    checkout_session = stripe.checkout.Session.create(
+        payment_method_types=['card'],
+        line_items=[
+            {
+                'price_data': {
+                    'currency': 'usd',
+                    'product_data': {
+                        'name': f'Pay for order {item.id}'
+                    },
+                    'unit_amount': item.get_total_cost()
                 },
                 'quantity': 1,
             }

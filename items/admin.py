@@ -3,6 +3,7 @@ from django.contrib import admin
 from items.models import Item
 
 
+@admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
     list_display = (
         'id',
@@ -10,6 +11,3 @@ class ItemAdmin(admin.ModelAdmin):
         'description',
         'price',
     )
-
-
-admin.site.register(Item, ItemAdmin)
